@@ -1,0 +1,180 @@
+.bg-img {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+.center-wrapper, .login-box {
+  position: relative;
+  z-index: 1;
+}
+
+.center-wrapper {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-page {
+  background: url('/assets/bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  min-height: unset;
+  height: unset;
+  display: block;
+  text-align: center;
+
+  .login-box {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px 0 rgba(60,60,60,0.10), 0 1.5px 4px 0 rgba(0,0,0,0.04);
+    padding: 40px 28px 32px 28px;
+    max-width: 370px;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* ✅ Center logo */
+    margin-bottom: 24px;
+
+    img {
+      width: 72px;
+      margin-top: 40px;
+    }
+
+    .app-title {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #111;
+      margin-top: 12px;
+      margin-bottom: 0;
+    }
+  }
+
+  form {
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  ion-list {
+    width: 100%;
+    margin: 0 auto 8px auto;
+    background: transparent;
+  }
+
+  .input-item {
+    background: #f7f7f7;
+    border-radius: 8px;
+    margin-bottom: 14px;
+    border: 1px solid #e5e5e5;
+    --padding-start: 18px;
+    --inner-padding-end: 18px;
+    min-height: 48px;
+    box-shadow: none;
+  }
+
+  ion-input {
+    font-size: 16px;
+    background: transparent;
+    color: #222;
+  }
+
+  .forgot-password {
+    color: #888;
+    font-size: 14px;
+    margin: 0 0 18px 0;
+    text-align: right;
+    cursor: pointer;
+  }
+
+  .login-btn {
+    width: 100%;
+    max-width: 340px;
+    height: 48px;
+    border-radius: 24px;
+    font-size: 18px;
+    font-weight: 700;
+    background: #111;
+    color: #fff;
+    margin: 0 auto 18px auto;
+    letter-spacing: 1px;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 18px 0 12px 0;
+    color: #bbb;
+    font-size: 14px;
+    width: 100%;
+    max-width: 340px;
+    position: relative;
+  }
+  .divider span {
+    background: #fff;
+    padding: 0 12px;
+    z-index: 1;
+  }
+  .divider:before, .divider:after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #eee;
+    position: relative;
+    top: 0.5em;
+  }
+  .divider:before {
+    margin-right: 8px;
+  }
+  .divider:after {
+    margin-left: 8px;
+  }
+
+  .social-login {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto 18px auto;
+  }
+  .social-btn {
+    border-radius: 24px;
+    font-size: 16px;
+    font-weight: 600;
+    --background: #fff;
+    --border-color: #e5e5e5;
+    --color: #222;
+    box-shadow: none;
+  }
+
+  .signup-link {
+    margin-top: 18px;
+    font-size: 15px;
+    color: #888;
+    text-align: center;
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+    span {
+      margin-right: 4px;
+    }
+    a {
+      color: #111;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+}

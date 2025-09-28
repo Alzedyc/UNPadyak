@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <!-- Profile Section -->
+    <ion-item-divider>
+      <ion-label>Profile</ion-label>
+    </ion-item-divider>
+
+    <ion-item button (click)="editProfile()">
+      <ion-icon slot="start" name="person-outline" color="primary"></ion-icon>
+      <ion-label>Edit Profile</ion-label>
+      <ion-icon slot="end" name="chevron-forward" color="medium"></ion-icon>
+    </ion-item>
+
+    <!-- Preferences Section -->
+    <ion-item-divider>
+      <ion-label>Preferences</ion-label>
+    </ion-item-divider>
+
+    <ion-item button (click)="notifications()">
+      <ion-icon slot="start" name="notifications-outline" color="primary"></ion-icon>
+      <ion-label>Notifications</ion-label>
+      <ion-icon slot="end" name="chevron-forward" color="medium"></ion-icon>
+    </ion-item>
+
+    <ion-item button (click)="privacy()">
+      <ion-icon slot="start" name="shield-outline" color="primary"></ion-icon>
+      <ion-label>Privacy & Security</ion-label>
+      <ion-icon slot="end" name="chevron-forward" color="medium"></ion-icon>
+    </ion-item>
+
+    <!-- Account Section -->
+    <ion-item-divider>
+      <ion-label>Account</ion-label>
+    </ion-item-divider>
+
+    <ion-item button (click)="help()">
+      <ion-icon slot="start" name="help-circle-outline" color="primary"></ion-icon>
+      <ion-label>Help & Support</ion-label>
+      <ion-icon slot="end" name="chevron-forward" color="medium"></ion-icon>
+    </ion-item>
+
+    <ion-item button (click)="about()">
+      <ion-icon slot="start" name="information-circle-outline" color="primary"></ion-icon>
+      <ion-label>About</ion-label>
+      <ion-icon slot="end" name="chevron-forward" color="medium"></ion-icon>
+    </ion-item>
+
+    <ion-item button (click)="logout()" class="logout-item">
+      <ion-icon slot="start" name="log-out-outline" color="danger"></ion-icon>
+      <ion-label color="danger">Log Out</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

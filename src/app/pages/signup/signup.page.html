@@ -1,0 +1,30 @@
+<ion-content class="signup-page" fullscreen>
+  <img class="bg-img" src="assets/bg.jpg" alt="background" />
+  <div class="center-wrapper">
+    <div class="signup-box">
+      <h1 class="signup-title">Sign up</h1>
+      <form (ngSubmit)="onSignup()" #signupForm="ngForm">
+        <ion-list lines="none">
+          <ion-item class="input-item">
+            <ion-label position="floating">Name</ion-label>
+            <ion-input type="text" required [(ngModel)]="username" name="username"></ion-input>
+          </ion-item>
+          <ion-item class="input-item">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" required [(ngModel)]="email" name="email"></ion-input>
+          </ion-item>
+          <ion-item class="input-item">
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" required [(ngModel)]="password" name="password"></ion-input>
+          </ion-item>
+        </ion-list>
+        <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+        <ion-button expand="block" class="signup-btn" type="submit">Sign Up</ion-button>
+      </form>
+      <div class="login-link">
+        <span>Already have an account?</span>
+        <a (click)="goToLogin()">Log in</a>
+      </div>
+    </div>
+  </div>
+</ion-content> 

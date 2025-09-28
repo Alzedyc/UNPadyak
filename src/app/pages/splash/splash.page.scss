@@ -1,0 +1,52 @@
+.splash-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ensures full screen */
+    background-color: #ffffff;
+    text-align: center;
+  
+    ion-content {
+      --background: #ffffff; /* Ensures background applies */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%; /* Fix for Ionic layout issues */
+    }
+  
+    .splash-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+  
+      img {
+        width: 160px;
+        max-width: 60%;
+        margin-top: 75%;
+        animation: fadeIn 1.5s ease-in-out;
+      }
+  
+      h1 {
+        font-size: 26px;
+        color: #2d5f9a;
+        font-weight: bold;
+        letter-spacing: 1.2px;
+        margin-top: 15px;
+        animation: fadeIn 2s ease-in-out;
+      }
+    }
+  }
+  
+  /* Animation Keyframes */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <div style="width: 100%; display: flex; justify-content: center; align-items: center;">
+      <img src="assets/logo.png" style="width: 40px; height: 40px;">
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Floating Action Button for new posts -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="presentPostModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-list>
+    <ion-card *ngFor="let post of posts">
+      <!-- Post Header -->
+      <ion-item lines="none">
+        <ion-avatar slot="start">
+          <img [src]="post.user.avatar || 'assets/machinarium.png'">
+        </ion-avatar>
+        <ion-label>
+          <h2><strong>{{post.user.username}}</strong></h2>
+          <p class="timestamp">{{post.createdAt | timeAgo}}</p>
+        </ion-label>
+      </ion-item>
+
+      <!-- Post Image -->
+      <img [src]="post.image || 'assets/tracker.png'" class="activity-image" *ngIf="post.image" />
+
+      <!-- Post Content -->
+      <ion-card-content>
+        <h3><strong>{{post.activity.icon}} {{post.activity.name}}</strong></h3>
+        <p>Distance: <strong>{{post.distance}} km</strong> | Time: <strong>{{post.time}}</strong></p>
+        <p>{{post.caption}}</p>
+      </ion-card-content>
+
+      <!-- Interaction Buttons -->
+      <ion-row class="interaction-buttons">
+        <ion-col class="ion-no-padding">
+          <div class="like-container">
+            <ion-button fill="clear" color="dark" (click)="toggleLike(post)">
+              <ion-icon [name]="post.likedByUser ? 'heart' : 'heart-outline'"></ion-icon>
+            </ion-button>
+            <span class="like-count">{{post.likes}} {{post.likes === 1 ? 'like' : 'likes'}}</span>
+          </div>
+        </ion-col>
+        <ion-col class="ion-no-padding">
+          <ion-button fill="clear" color="dark" (click)="toggleComments(post)">
+            <ion-icon name="chatbubble-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <!-- Comments Section -->
+      <ion-card-content class="post-stats" *ngIf="post.showComments">
+        <div *ngFor="let comment of post.comments" class="comment">
+          <strong>{{comment.user.username}}:</strong> {{comment.text}}
+        </div>
+        
+        <!-- Add Comment -->
+        <ion-item>
+          <ion-input [(ngModel)]="post.newComment" placeholder="Add a comment..."></ion-input>
+          <ion-button fill="clear" (click)="addComment(post)" [disabled]="!post.newComment">
+            <ion-icon name="send"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-card-content>
+
+      <!-- View Comments Toggle -->
+      <ion-card-content class="post-stats" *ngIf="!post.showComments && post.comments.length > 0">
+        <p class="view-comments" (click)="toggleComments(post)">
+          View all {{post.comments.length}} {{post.comments.length === 1 ? 'comment' : 'comments'}}
+        </p>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

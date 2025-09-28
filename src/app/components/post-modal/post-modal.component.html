@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismiss()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>New Activity</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="postActivity()" [disabled]="isTracking">Post</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Activity Type</ion-label>
+      <ion-select [(ngModel)]="activity.type" interface="action-sheet" [disabled]="isTracking">
+        <ion-select-option *ngFor="let act of activityTypes" [value]="act">
+          {{act.icon}} {{act.name}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Activity Stats -->
+    <ion-item lines="none" class="stats-container">
+      <div class="stats">
+        <div class="stat-item">
+          <ion-label>Distance</ion-label>
+          <h2>{{activity.distance}} km</h2>
+        </div>
+        <div class="stat-item">
+          <ion-label>Time</ion-label>
+          <h2>{{activity.time}}</h2>
+        </div>
+        <div class="stat-item" *ngIf="isTracking">
+          <ion-label>Speed</ion-label>
+          <h2>{{speed || 0}} km/h</h2>
+        </div>
+      </div>
+    </ion-item>
+
+    <!-- Start/Stop Tracking Button -->
+    <ion-item lines="none" class="tracking-button-container">
+      <ion-button 
+        expand="block" 
+        [color]="isTracking ? 'danger' : 'primary'"
+        (click)="toggleTracking()">
+        <ion-icon [name]="isTracking ? 'stop-circle' : 'play'" slot="start"></ion-icon>
+        {{isTracking ? 'Stop Activity' : 'Start Activity'}}
+      </ion-button>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Caption (optional)</ion-label>
+      <ion-textarea [(ngModel)]="activity.caption" rows="3"></ion-textarea>
+    </ion-item>
+
+    <!-- Image Preview -->
+    <ion-item *ngIf="activity.image">
+      <img [src]="activity.image" class="preview-image">
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Add Image</ion-label>
+      <ion-button fill="outline" slot="end" (click)="selectImage()">
+        <ion-icon name="camera" slot="start"></ion-icon>
+        Take Photo
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,85 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Leaderboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Activity Selector -->
+  <div class="ion-padding">
+    <ion-segment [(ngModel)]="selectedActivity" class="activity-segment">
+      <ion-segment-button value="cycling">
+        <ion-icon name="bicycle"></ion-icon>
+        <ion-label>Cycling</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="running">
+        <ion-icon name="footsteps-outline"></ion-icon>
+        <ion-label>Running</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="walking">
+        <ion-icon name="walk"></ion-icon>
+        <ion-label>Walking</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <!-- Leaderboard List -->
+  <div class="leaderboard-container">
+    <ion-list class="leaderboard-list">
+      <!-- Top 3 Podium -->
+      <div class="podium-container" *ngIf="getCurrentLeaderboard().length >= 3">
+        <div class="podium-item second">
+          <div class="rank">2</div>
+          <ion-avatar>
+            <img [src]="getCurrentLeaderboard()[1].avatar" [alt]="getCurrentLeaderboard()[1].name">
+          </ion-avatar>
+          <div class="user-info">
+            <h3>{{getCurrentLeaderboard()[1].name}}</h3>
+            <p>{{formatDistance(getCurrentLeaderboard()[1].distance)}}</p>
+          </div>
+        </div>
+        <div class="podium-item first">
+          <div class="rank">1</div>
+          <ion-avatar>
+            <img [src]="getCurrentLeaderboard()[0].avatar" [alt]="getCurrentLeaderboard()[0].name">
+          </ion-avatar>
+          <div class="user-info">
+            <h3>{{getCurrentLeaderboard()[0].name}}</h3>
+            <p>{{formatDistance(getCurrentLeaderboard()[0].distance)}}</p>
+          </div>
+        </div>
+        <div class="podium-item third">
+          <div class="rank">3</div>
+          <ion-avatar>
+            <img [src]="getCurrentLeaderboard()[2].avatar" [alt]="getCurrentLeaderboard()[2].name">
+          </ion-avatar>
+          <div class="user-info">
+            <h3>{{getCurrentLeaderboard()[2].name}}</h3>
+            <p>{{formatDistance(getCurrentLeaderboard()[2].distance)}}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rest of the Leaderboard -->
+      <ion-item *ngFor="let user of getCurrentLeaderboard().slice(3)" lines="none" class="leaderboard-item">
+        <div class="item-content">
+          <div class="rank">{{user.rank}}</div>
+          <ion-avatar>
+            <img [src]="user.avatar" [alt]="user.name">
+          </ion-avatar>
+          <div class="user-info">
+            <h2>{{user.name}}</h2>
+            <p>{{user.username}}</p>
+          </div>
+          <div class="distance">
+            <strong>{{formatDistance(user.distance)}}</strong>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

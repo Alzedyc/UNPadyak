@@ -1,0 +1,151 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="profile-content">
+  <!-- Hidden file inputs -->
+  <input
+    #profileInput
+    type="file"
+    accept="image/*"
+    style="display: none"
+    (change)="onProfilePhotoSelected($event)"
+  >
+  <input
+    #coverInput
+    type="file"
+    accept="image/*"
+    style="display: none"
+    (change)="onCoverPhotoSelected($event)"
+  >
+
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Cover Photo -->
+  <div class="cover-photo" [style.backgroundImage]="'url(' + profileCoverPhoto + ')'">
+    <div class="overlay"></div>
+    <ion-button fill="clear" class="edit-cover-btn" (click)="selectCoverPhoto()">
+      <ion-icon name="camera-outline"></ion-icon>
+    </ion-button>
+  </div>
+
+  <!-- Profile Info -->
+  <div class="profile-info" *ngIf="user">
+    <div class="avatar-container">
+      <ion-avatar class="profile-avatar">
+        <img [src]="profileAvatar" alt="Profile Photo">
+      </ion-avatar>
+      <ion-button fill="clear" class="edit-avatar-btn" (click)="selectProfilePicture()">
+        <ion-icon name="camera-outline"></ion-icon>
+      </ion-button>
+    </div>
+
+    <div class="user-details">
+      <h1>{{user?.username}}</h1>
+      <p class="username">{{user?.email}}</p>
+      <p class="bio">{{displayBio}}</p>
+      <div class="location" *ngIf="displayLocation">
+        <ion-icon name="location-outline"></ion-icon>
+        <span>{{displayLocation}}</span>
+      </div>
+      <div class="action-buttons">
+        <ion-button expand="block" (click)="editProfile()">Edit Profile</ion-button>
+        <ion-button expand="block" fill="outline" (click)="shareProfile()">
+          <ion-icon name="share-outline" slot="start"></ion-icon>
+          Share
+        </ion-button>
+        <ion-button expand="block" fill="outline" color="danger" (click)="logout()">
+          <ion-icon name="log-out-outline" slot="start"></ion-icon>
+          Log Out
+        </ion-button>
+      </div>
+    </div>
+
+    <!-- Stats Grid -->
+    <ion-grid class="stats-grid">
+      <ion-row>
+        <ion-col size="6">
+          <div class="stat-box" (click)="viewFollowers()">
+            <strong>{{displayStats.followers}}</strong>
+            <span>Followers</span>
+          </div>
+        </ion-col>
+        <ion-col size="6">
+          <div class="stat-box" (click)="viewFollowing()">
+            <strong>{{displayStats.following}}</strong>
+            <span>Following</span>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- Quick Stats -->
+    <div class="quick-stats">
+      <ion-chip>
+        <ion-icon name="speedometer-outline"></ion-icon>
+        <ion-label>{{formatDistance(displayStats.totalDistance)}}</ion-label>
+      </ion-chip>
+      <ion-chip>
+        <ion-icon name="time-outline"></ion-icon>
+        <ion-label>{{formatDuration(displayStats.totalTime)}}</ion-label>
+      </ion-chip>
+    </div>
+  </div>
+
+  <!-- Recent Activities -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Recent Activities</h2>
+      <ion-button fill="clear" size="small" (click)="viewAllActivities()">
+        View All
+        <ion-icon name="chevron-forward" slot="end"></ion-icon>
+      </ion-button>
+    </div>
+
+    <ion-list>
+      <ion-item *ngFor="let activity of recentActivities" lines="full">
+        <ion-thumbnail slot="start">
+          <img [src]="activity.image" alt="Activity">
+        </ion-thumbnail>
+        <ion-label>
+          <h3>{{activity.type}}</h3>
+          <p>{{activity.date | date:'MMM d, y'}}</p>
+          <div class="activity-stats">
+            <span>
+              <ion-icon name="speedometer-outline"></ion-icon>
+              {{formatDistance(activity.distance)}}
+            </span>
+            <span>
+              <ion-icon name="time-outline"></ion-icon>
+              {{formatDuration(activity.time)}}
+            </span>
+            <span>
+              <ion-icon name="flame-outline"></ion-icon>
+              {{activity.calories}} cal
+            </span>
+          </div>
+        </ion-label>
+        <div slot="end" class="kudos-count">
+          <ion-icon name="heart-outline"></ion-icon>
+          <span>{{activity.kudos}}</span>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="recentActivities.length === 0">
+    <ion-icon name="person-circle-outline"></ion-icon>
+    <h2>Complete Your Profile</h2>
+    <p>Add a profile picture and cover photo to personalize your profile</p>
+  </div>
+</ion-content>

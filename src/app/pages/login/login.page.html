@@ -1,0 +1,28 @@
+<ion-content class="login-page" fullscreen>
+  <img class="bg-img" src="assets/bg.jpg" alt="background" />
+  <div class="center-wrapper">
+    <div class="login-box">
+      <div class="logo-container">
+        <img src="assets/logo.png" alt="Logo" />
+        <h1 class="app-title">UNPADYAK</h1>
+      </div>
+      <form (ngSubmit)="login()" #loginForm="ngForm">
+        <ion-list lines="none">
+          <ion-item class="input-item">
+            <ion-input placeholder="Username or Email" type="text" required [(ngModel)]="usernameOrEmail" name="usernameOrEmail"></ion-input>
+          </ion-item>
+          <ion-item class="input-item">
+            <ion-input type="password" placeholder="Password" required [(ngModel)]="password" name="password"></ion-input>
+          </ion-item>
+        </ion-list>
+        <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+        <p class="forgot-password">Forgot password?</p>
+        <ion-button expand="block" class="login-btn" type="submit">Log in</ion-button>
+      </form>
+      <div class="signup-link">
+        <span>Don't have an account?</span>
+        <a (click)="goToSignup()">Sign up</a>
+      </div>
+    </div>
+  </div>
+</ion-content>

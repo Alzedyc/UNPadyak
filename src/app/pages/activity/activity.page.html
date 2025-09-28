@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Activity</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item-group>
+      <ion-item-divider sticky>
+        <ion-label>Recent Activity</ion-label>
+      </ion-item-divider>
+
+      <!-- Activity Items -->
+      <ion-item *ngFor="let activity of activities" class="activity-item" [routerLink]="['/tabs/feed']">
+        <ion-avatar slot="start">
+          <img [src]="activity.post.user.avatar">
+        </ion-avatar>
+        <ion-label>
+          <h3>{{activity.details}}</h3>
+          <p class="timestamp">{{activity.timestamp | timeAgo}}</p>
+          
+          <!-- Compact Activity Preview -->
+          <div class="activity-preview">
+            <ion-text color="medium">
+              <p class="preview-text">
+                <ion-icon [name]="getActivityIcon(activity.type)" class="preview-icon"></ion-icon>
+                {{activity.post.activity.icon}} {{activity.post.distance}} km • {{activity.post.time}}
+              </p>
+            </ion-text>
+          </div>
+        </ion-label>
+      </ion-item>
+
+      <!-- Empty state -->
+      <ion-item *ngIf="activities.length === 0" lines="none">
+        <ion-label color="medium" class="ion-text-center">
+          <p>No activity yet</p>
+          <p>Your interactions will appear here</p>
+        </ion-label>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+</ion-content>

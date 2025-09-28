@@ -1,0 +1,28 @@
+.welcome-container {
+    display: flex;
+    justify-content: center; /* ✅ Centers horizontally */
+    align-items: center; /* ✅ Centers vertically */
+    height: 100vh; /* ✅ Full height of the screen */
+    width: 100vw; /* ✅ Full width of the screen */
+    background-color: #fff;
+    text-align: center; /* ✅ Ensures text is centered */
+    margin-top: 50%;
+  }
+  
+  .fade-in {
+    font-size: 32px;
+    color: #00509e;
+    font-weight: bold;
+    margin-top: 100%;
+    animation: fadeIn 2s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
